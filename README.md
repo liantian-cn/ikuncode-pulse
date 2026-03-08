@@ -27,7 +27,7 @@
 ```json
 {
   "ikuncode-pulse.baseApiUrl": "https://api.ikuncode.cc/api/",
-  "ikuncode-pulse.userId": "13167",
+  "ikuncode-pulse.userId": "",
   "ikuncode-pulse.accessToken": "your-token",
   "ikuncode-pulse.siteName": "IkunCode",
   "ikuncode-pulse.siteUrl": "https://api.ikuncode.cc/"
