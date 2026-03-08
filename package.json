@@ -1,0 +1,108 @@
+{
+  "name": "ikuncode-pulse",
+  "displayName": "IkunCode Pulse",
+  "description": "在 VS Code 状态栏显示 AI 余额与会话花费。",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liantian-cn/ikuncode-pulse.git"
+  },
+  "engines": {
+    "vscode": "^1.109.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "token",
+    "quota",
+    "billing",
+    "statusbar"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:ikuncode-pulse.refresh",
+    "onCommand:ikuncode-pulse.openSettings"
+  ],
+  "main": "./out/extension.js",
+  "files": [
+    "out",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "sync:branding": "node ./scripts/sync-branding.mjs",
+    "compile": "npm run sync:branding && tsc -p ./",
+    "watch": "npm run sync:branding && tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package": "vsce package"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "ikuncode-pulse.refresh",
+        "title": "IkunCode Pulse: Refresh"
+      },
+      {
+        "command": "ikuncode-pulse.openSettings",
+        "title": "IkunCode Pulse: Open Settings"
+      }
+    ],
+    "configuration": {
+      "title": "IkunCode Pulse",
+      "properties": {
+        "ikuncode-pulse.baseApiUrl": {
+          "type": "string",
+          "default": "https://api.ikuncode.cc/api/",
+          "scope": "application",
+          "markdownDescription": "必填。API 基础地址，例如 `https://api.ikuncode.cc/api/`。"
+        },
+        "ikuncode-pulse.userId": {
+          "type": "string",
+          "default": "",
+          "scope": "application",
+          "markdownDescription": "必填。请求头里的 `New-Api-User`。"
+        },
+        "ikuncode-pulse.accessToken": {
+          "type": "string",
+          "default": "",
+          "scope": "application",
+          "markdownDescription": "必填。请求头里的 Bearer 令牌。建议只写在 VS Code 用户设置里。"
+        },
+        "ikuncode-pulse.siteName": {
+          "type": "string",
+          "default": "IkunCode",
+          "scope": "application",
+          "markdownDescription": "选填。站点名称，会显示在 tooltip 底部链接里。"
+        },
+        "ikuncode-pulse.siteUrl": {
+          "type": "string",
+          "default": "https://api.ikuncode.cc/",
+          "scope": "application",
+          "markdownDescription": "选填。站点地址，需带 `http` 或 `https`。"
+        },
+        "ikuncode-pulse.refreshSeconds": {
+          "type": "number",
+          "default": 60,
+          "minimum": 10,
+          "scope": "application",
+          "markdownDescription": "轮询间隔秒数，默认 60 秒。"
+        },
+        "ikuncode-pulse.enableAnimation": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "markdownDescription": "最近一个轮询窗口有新增花费时，是否在状态栏显示短暂动画。"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.5",
+    "@types/vscode": "^1.109.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.9.3"
+  }
+}
