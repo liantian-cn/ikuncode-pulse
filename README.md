@@ -27,7 +27,7 @@
 ```json
 {
   "ikuncode-pulse.baseApiUrl": "https://api.ikuncode.cc/api/",
-  "ikuncode-pulse.userId": "",
+  "ikuncode-pulse.userId": "13167",
   "ikuncode-pulse.accessToken": "your-token",
   "ikuncode-pulse.siteName": "IkunCode",
   "ikuncode-pulse.siteUrl": "https://api.ikuncode.cc/"
@@ -45,6 +45,29 @@
 - 接口返回的 `quota` 按 `quota / 500000 = 人民币` 计算。
 - 剩余额度、总额度显示 2 位小数。
 - 本次刷新花费、本次会话花费显示 6 位小数。
+
+## GitHub Releases 自动打包
+
+项目已自带 GitHub Actions 工作流：`.github/workflows/release.yml`
+
+触发方式：
+
+- 推送形如 `v0.0.1` 的标签
+- 或在 GitHub Actions 页面手动运行
+
+工作流会自动：
+
+- 安装依赖
+- 执行 `npm run package`
+- 创建或更新 GitHub Release
+- 把生成的 `.vsix` 上传到 Release 附件里
+
+常用发布步骤：
+
+```bash
+git tag v0.0.1
+git push origin v0.0.1
+```
 
 ## 开发
 
