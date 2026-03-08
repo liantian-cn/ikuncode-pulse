@@ -2,7 +2,7 @@
   "name": "ikuncode-pulse",
   "displayName": "IkunCode Pulse",
   "description": "在 VS Code 状态栏显示 AI 余额与会话花费。",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/liantian-cn/ikuncode-pulse.git"
@@ -23,12 +23,13 @@
   "activationEvents": [
     "onStartupFinished",
     "onCommand:ikuncode-pulse.refresh",
-    "onCommand:ikuncode-pulse.openSettings"
+    "onCommand:ikuncode-pulse.openSettings",
+    "onCommand:ikunncode-pulse.refresh",
+    "onCommand:ikunncode-pulse.openSettings"
   ],
   "main": "./out/extension.js",
   "files": [
     "out",
-    "branding.json",
     "LICENSE",
     "README.md",
     "CHANGELOG.md"

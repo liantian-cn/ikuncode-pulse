@@ -4,6 +4,7 @@ import path from 'node:path';
 const rootDir = process.cwd();
 const brandingPath = path.join(rootDir, 'branding.json');
 const packageJsonPath = path.join(rootDir, 'package.json');
+const brandingTsPath = path.join(rootDir, 'src', 'branding.ts');
 
 const branding = JSON.parse(fs.readFileSync(brandingPath, 'utf8'));
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
@@ -38,3 +39,19 @@ if (properties['ikuncode-pulse.siteUrl']) {
 }
 
 fs.writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`, 'utf8');
+
+const brandingTs = `export interface BrandingConfig {
+  packageName: string;
+  displayName: string;
+  description: string;
+  defaultBaseApiUrl: string;
+  defaultSiteName: string;
+  defaultSiteUrl: string;
+}
+
+const branding: BrandingConfig = ${JSON.stringify(branding, null, 2)};
+
+export default branding;
+`;
+
+fs.writeFileSync(brandingTsPath, brandingTs, 'utf8');

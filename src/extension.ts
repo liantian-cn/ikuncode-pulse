@@ -1,7 +1,11 @@
 import * as vscode from 'vscode';
-import branding from '../branding.json';
+import branding from './branding';
 
 const CONFIG_SECTION = 'ikuncode-pulse';
+const REFRESH_COMMAND = 'ikuncode-pulse.refresh';
+const OPEN_SETTINGS_COMMAND = 'ikuncode-pulse.openSettings';
+const LEGACY_REFRESH_COMMAND = 'ikunncode-pulse.refresh';
+const LEGACY_OPEN_SETTINGS_COMMAND = 'ikunncode-pulse.openSettings';
 const QUOTA_PER_CNY = 500000;
 const DEFAULT_REFRESH_SECONDS = 60;
 const RECENT_WINDOW_SECONDS = 60;
@@ -161,7 +165,7 @@ class AiTokenPulseController implements vscode.Disposable {
   public constructor(private readonly context: vscode.ExtensionContext) {
     this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 1000);
     this.statusBarItem.name = branding.displayName;
-    this.statusBarItem.command = 'ikuncode-pulse.refresh';
+    this.statusBarItem.command = REFRESH_COMMAND;
     this.statusBarItem.show();
 
     this.disposables.push(this.statusBarItem);
@@ -193,13 +197,18 @@ class AiTokenPulseController implements vscode.Disposable {
   }
 
   private registerCommands(): void {
+    const refreshHandler = async (): Promise<void> => {
+      await this.refresh('manual', 'heavy', true);
+    };
+    const openSettingsHandler = async (): Promise<void> => {
+      await vscode.commands.executeCommand('workbench.action.openSettings', CONFIG_SECTION);
+    };
+
     this.disposables.push(
-      vscode.commands.registerCommand('ikuncode-pulse.refresh', async () => {
-        await this.refresh('manual', 'heavy', true);
-      }),
-      vscode.commands.registerCommand('ikuncode-pulse.openSettings', async () => {
-        await vscode.commands.executeCommand('workbench.action.openSettings', 'ikuncode-pulse');
-      }),
+      vscode.commands.registerCommand(REFRESH_COMMAND, refreshHandler),
+      vscode.commands.registerCommand(OPEN_SETTINGS_COMMAND, openSettingsHandler),
+      vscode.commands.registerCommand(LEGACY_REFRESH_COMMAND, refreshHandler),
+      vscode.commands.registerCommand(LEGACY_OPEN_SETTINGS_COMMAND, openSettingsHandler),
     );
   }
 
