@@ -22,8 +22,6 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onCommand:ikuncode-pulse.refresh",
-    "onCommand:ikuncode-pulse.openSettings",
     "onCommand:ikunncode-pulse.refresh",
     "onCommand:ikunncode-pulse.openSettings"
   ],
