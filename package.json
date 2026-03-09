@@ -8,7 +8,7 @@
     "url": "https://github.com/liantian-cn/ikuncode-pulse.git"
   },
   "engines": {
-    "vscode": "^1.109.0"
+    "vscode": "^1.107.0"
   },
   "categories": [
     "Other"
@@ -81,7 +81,7 @@
           "type": "string",
           "default": "https://api.ikuncode.cc/",
           "scope": "application",
-          "markdownDescription": "选填。站点地址，需带 `http` 或 `https`。"
+          "markdownDescription": "选填。站点地址，需要带 `http` 或 `https`。"
         },
         "ikuncode-pulse.refreshSeconds": {
           "type": "number",
@@ -101,7 +101,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.3.5",
-    "@types/vscode": "^1.109.0",
+    "@types/vscode": "^1.107.0",
     "@vscode/vsce": "^3.7.1",
     "typescript": "^5.9.3"
   }
